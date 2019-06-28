@@ -16,16 +16,6 @@ export const useDebounce = <T>(value: T, delay: number): T => {
   return debouncedValue;
 };
 
-export const usePrevious = <T>(value: T): T | undefined => {
-  const ref = React.useRef<T>();
-
-  React.useEffect(() => {
-    ref.current = value;
-  });
-
-  return ref.current;
-};
-
 /**
  * Hook that ignores the first invocation (e.g. on mount).
  * The signature is exactly the same as `useEffect`.

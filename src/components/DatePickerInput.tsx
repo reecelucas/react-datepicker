@@ -3,6 +3,7 @@ import { format, isValid, parse } from 'date-fns';
 import { StateContext, DispatchContext } from './DatePickerContext';
 import * as actionTypes from '../reducer/actionTypes';
 import DatePickerDescription from './DatePickerDescription';
+import { isEqualDate } from '../helpers/date';
 import { isFunction } from '../helpers/function';
 import { useDebounce, useUpdateEffect } from '../helpers/hooks';
 import { SCREEN_READER_MESSAGE_ID } from '../constants';
@@ -30,18 +31,23 @@ const DatePickerInput = ({
   useUpdateEffect(() => {
     /**
      * Once the user has stopped typing, try and parse the input
-     * value into a date. If the date is valid, update the relevant
-     * global state values to keep the calendar and input in sync,
+     * value into a date. If the date is valid, update the `selectedDate`
+     * to keep the `DatePickerTable` and `DatePickerInput` in sync,
      * otherwise do nothing.
      */
     const newSelectedDate = parse(debouncedValue, dateFormat, new Date());
 
-    if (isValid(newSelectedDate)) {
-      dispatch({
-        type: actionTypes.SET_SELECTED_DATE,
-        payload: newSelectedDate
-      });
+    if (
+      isEqualDate(newSelectedDate, selectedDate) ||
+      !isValid(newSelectedDate)
+    ) {
+      return;
     }
+
+    dispatch({
+      type: actionTypes.SET_SELECTED_DATE,
+      payload: newSelectedDate
+    });
   }, [debouncedValue]);
 
   useUpdateEffect(() => {
@@ -49,6 +55,8 @@ const DatePickerInput = ({
      * Keep `selectedDate` in sync with the local input `value`.
      * When the user selects a date from the `DatePickerTable`,
      * we need to reflect this selection in the `DatePickerInput`.
+     * We use `useUpdateEffect` because we want to ignore the initial
+     * render and only sync in response to user interaction.
      */
     setValue(format(selectedDate, dateFormat, { locale }));
   }, [selectedDate]);

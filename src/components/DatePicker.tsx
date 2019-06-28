@@ -12,12 +12,8 @@ import {
 import { StateContext, DispatchContext } from './DatePickerContext';
 import reducer from '../reducer';
 import * as actionTypes from '../reducer/actionTypes';
-import { getClosestSelectableDate, isEqualDate } from '../helpers/date';
-import {
-  useUpdateEffect,
-  usePrevious,
-  useClickOutside
-} from '../helpers/hooks';
+import { getClosestSelectableDate } from '../helpers/date';
+import { useUpdateEffect, useClickOutside } from '../helpers/hooks';
 import { DatePickerProps } from '../types';
 
 type Props = DatePickerProps & React.HTMLProps<HTMLDivElement>;
@@ -54,7 +50,6 @@ const DatePicker = ({
     showCalendar: false,
     allowCellFocus: false
   });
-  const prevSelectedDate = usePrevious(state.selectedDate);
 
   /*******************************************
    * HELPERS
@@ -76,10 +71,12 @@ const DatePicker = ({
   });
 
   useUpdateEffect(() => {
-    if (prevSelectedDate && isEqualDate(prevSelectedDate, state.selectedDate)) {
-      // We've received a different `selectedDate`, so pass it back to the user
-      onSelect(state.selectedDate);
-    }
+    /**
+     * We use `useUpdateEffect` because we want to ignore the
+     * initial render and only call the `onSelect` callback in
+     * response to user interaction.
+     */
+    onSelect(state.selectedDate);
   }, [state.selectedDate]);
 
   useClickOutside(ref, () => {
