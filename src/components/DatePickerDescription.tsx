@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SCREEN_READER_MESSAGE_ID } from '../constants';
 
 interface Props {
-  message?: JSX.Element;
+  message?: React.ReactNode;
 }
 
 // Visually hide content; only make available to screen readers

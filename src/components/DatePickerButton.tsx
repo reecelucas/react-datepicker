@@ -15,7 +15,7 @@ interface Props
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  children: any;
+  children: React.ReactNode;
   updateMonth: ({ prev, next }: UpdateMonthParams) => void;
 }
 

@@ -2,6 +2,29 @@
 
 An accessible, internationalizable, React datepicker.
 
+* [Installation](#installation)
+* [Example Usage](#example-usage)
+  * [Basic](#basic)
+  * [Initial Date](#initial-date)
+  * [Min Date](#min-date)
+  * [Max Date](#max-date)
+  * [Date Range](#date-range)
+  * [Exclude Dates](#exclude-dates)
+  * [Include Dates](#include-dates)
+  * [Locale](#non-english-locale)
+  * [Month Format](#month-format)
+  * [Render Day Content](#render-day-content)
+  * [Input Date Format](#input-date-format)
+  * [Screen Reader Message](#screen-reader-message)
+* [Props](#props)
+  * [`DatePicker`](#DatePicker)
+  * [`DatePickerInput`](#DatePickerInput)
+  * [`DatePickerCalendar`](#DatePickerCalendar)
+  * [`DatePickerMonth`](#DatePickerMonth)
+  * [`DatePickerButton`](#DatePickerButton)
+  * [`DatePickeTable`](#DatePickeTable)
+* [LICENSE](#LICENSE)
+
 ## Installation
 
 ```Bash
@@ -230,6 +253,76 @@ const renderScreenReaderMsg = () => (
   {/* ... */}
 </DatePicker>
 ```
+
+## Props
+
+### `DatePicker`
+
+```js
+children: React.ReactNode;
+onSelect: (selectedDate: Date) => void;
+initialDate?: Date;
+minDate?: Date;
+maxDate?: Date;
+excludeDates?: Date[];
+includeDates?: Date[];
+locale?: Locale; // date-fns `locale` object
+```
+
+> Any props not listed above will be spread onto the underlying `DatePicker` element.
+
+### `DatePickerInput`
+
+```ts
+dateFormat?: string; // date-fns `format` string
+screenReaderMessage?: JSX.Element | () => JSX.Element;
+```
+
+> Any props not listed above will be spread onto the underlying `DatePickerInput` element.
+
+### `DatePickerCalendar`
+
+```ts
+children: React.ReactNode;
+```
+
+### `DatePickerMonth`
+
+```ts
+children?: (formattedDate: string) => JSX.Element;
+dateFormat?: string; // date-fns `format` string
+```
+
+> Any props not listed above will be spread onto the underlying `DatePickerMonth` element.
+
+### `DatePickerButton`
+
+```ts
+interface UpdateMonthParams {
+  prev: () => void;
+  next: () => void;
+}
+
+children: React.ReactNode;
+updateMonth: ({ prev, next }: UpdateMonthParams) => void;
+```
+
+> Any props not listed above will be spread onto the underlying `DatePickerButton` element.
+
+### DatePickerTable
+
+```ts
+interface RenderDayLabelParams {
+  date: Date;
+  isSelected: boolean;
+  isSelectable: boolean;
+}
+
+renderDayLabel?: ({ date, isSelected, isSelectable }: RenderDayLabelParams) => string;
+renderDayContent?: (date: Date) => React.ReactNode;
+```
+
+> Any props not listed above will be spread onto the underlying `DatePickerTable` element.
 
 ## LICENSE
 

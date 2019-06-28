@@ -213,6 +213,21 @@ storiesOf('DatePicker', module)
       </DatePickerCalendar>
     </StyledDatePicker>
   ))
+  .add('Render function: DatePickerMonth', () => (
+    <StyledDatePicker onSelect={date => console.log(date)}>
+      <DatePickerInput />
+      <br />
+      <DatePickerCalendar>
+        <DatePickerMonth>
+          {formattedDate => <strong>{formattedDate}</strong>}
+        </DatePickerMonth>
+        <br />
+        <DatePickerButton updateMonth={movePrevMonth}>Prev</DatePickerButton>
+        <DatePickerButton updateMonth={moveNextMonth}>Next</DatePickerButton>
+        <DatePickerTable />
+      </DatePickerCalendar>
+    </StyledDatePicker>
+  ))
   .add('onClick handler: DatePickerButton', () => (
     <StyledDatePicker onSelect={date => console.log(date)}>
       <DatePickerInput />

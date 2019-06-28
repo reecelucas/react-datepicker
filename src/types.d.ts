@@ -20,8 +20,8 @@ export interface DatePickerState {
 }
 
 export interface DatePickerProps {
-  children: React.ReactChildren | React.ReactFragment;
-  onSelect: (selectedDate: Date) => any;
+  children: React.ReactNode;
+  onSelect: (selectedDate: Date) => void;
   initialDate?: Date;
   minDate?: Date;
   maxDate?: Date;

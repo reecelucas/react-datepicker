@@ -17,8 +17,12 @@ import {
   isEqualDate
 } from '../helpers/date';
 
-type RenderDayLabel = ({ date, isSelectable }: RenderDayLabelParams) => string;
-type RenderDayContent = (date: Date) => string | React.ReactNode;
+type RenderDayContent = (date: Date) => React.ReactNode;
+type RenderDayLabel = ({
+  date,
+  isSelected,
+  isSelectable
+}: RenderDayLabelParams) => string;
 
 interface RenderDayLabelParams {
   date: Date;
