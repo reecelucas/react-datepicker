@@ -309,7 +309,7 @@ updateMonth: ({ prev, next }: UpdateMonthParams) => void;
 
 > Any props not listed above will be spread onto the underlying `DatePickerButton` element.
 
-### DatePickerTable
+### `DatePickerTable`
 
 ```ts
 interface RenderDayLabelParams {
