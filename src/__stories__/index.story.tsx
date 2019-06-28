@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import { addDays, addYears, format, getDate, isWeekend } from 'date-fns';
 import locale from 'date-fns/locale/fr'; // tslint:disable-line:no-submodule-imports
@@ -66,7 +65,6 @@ const renderScreenReaderMsg = () => (
 );
 
 storiesOf('DatePicker', module)
-  .addDecorator(withKnobs)
   .add('Basic', () => (
     <StyledDatePicker onSelect={date => console.log(date)}>
       <DatePickerInput />

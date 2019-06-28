@@ -40,7 +40,8 @@ export default (state: DatePickerState, action: Action) => {
         year: getYear(action.payload),
         month: getMonth(action.payload),
         selectedDate: action.payload,
-        focussedDate: action.payload // Keep the `selectedDate` and `focussedDate` in sync
+        focussedDate: action.payload, // Keep the `selectedDate` and `focussedDate` in sync
+        showCalendar: false
       };
     case actionTypes.SET_FOCUSSED_DATE:
       return {

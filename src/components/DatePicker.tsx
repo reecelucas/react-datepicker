@@ -172,7 +172,6 @@ const DatePicker = ({
       case 'Enter': {
         if (!isDisabled) {
           event.preventDefault();
-          dispatch({ type: actionTypes.HIDE_CALENDAR });
           dispatch({
             type: actionTypes.SET_SELECTED_DATE,
             payload: state.focussedDate

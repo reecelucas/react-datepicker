@@ -67,11 +67,6 @@ const DatePickerCalendar = ({
   const cells = [...blanks, ...monthDates];
   const rows = chunkArray(cells, 7);
 
-  const onCellClick = (date: Date) => {
-    dispatch({ type: actionTypes.SET_SELECTED_DATE, payload: date });
-    dispatch({ type: actionTypes.HIDE_CALENDAR });
-  };
-
   const renderWeekdays = () =>
     getWeekDays(locale).map(day => <th key={day}>{day}</th>);
 
@@ -118,7 +113,10 @@ const DatePickerCalendar = ({
         aria-disabled={isSelectable ? 'false' : 'true'}
         aria-selected={isSelected ? 'true' : 'false'}
         tabIndex={isSelected || isFocussed ? 0 : -1}
-        onClick={() => isSelectable && onCellClick(d)}
+        onClick={() =>
+          isSelectable &&
+          dispatch({ type: actionTypes.SET_SELECTED_DATE, payload: d })
+        }
         ref={ref => {
           if (ref && isFocussed) {
             ref.focus();
