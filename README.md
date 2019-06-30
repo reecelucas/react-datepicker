@@ -2,6 +2,10 @@
 
 An accessible, internationalizable React datepicker.
 
+![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@reecelucas/react-datepicker.svg)
+![npm (scoped)](https://img.shields.io/npm/v/@reecelucas/react-datepicker.svg)
+![GitHub](https://img.shields.io/github/license/reecelucas/react-datepicker.svg)
+
 * [Installation](#installation)
 * [Example Usage](#example-usage)
   * [Basic](#basic)
