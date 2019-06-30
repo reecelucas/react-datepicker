@@ -1,6 +1,6 @@
 # react-datepicker
 
-An accessible, internationalizable, React datepicker.
+An accessible, internationalizable React datepicker.
 
 * [Installation](#installation)
 * [Example Usage](#example-usage)
@@ -147,7 +147,7 @@ import locale from 'date-fns/locale/fr';
 
 ### Custom Month Format
 
-Pass a valid date-fns [`format`](https://date-fns.org/v1.30.1/docs/format) string.
+Pass a valid date-fns [`format`](https://date-fns.org/v2.0.0-alpha.37/docs/format) string.
 
 ```jsx
 <DatePicker onSelect={date => console.log(date)}>
@@ -182,7 +182,7 @@ import { getDate, isWeekend } from 'date-fns';
 
 ### Custom Input Date Format
 
-Pass a valid date-fns [`format`](https://date-fns.org/v1.30.1/docs/format) string.
+Pass a valid date-fns [`format`](https://date-fns.org/v2.0.0-alpha.37/docs/format) string.
 
 ```jsx
 <DatePicker onSelect={date => console.log(date)}>
