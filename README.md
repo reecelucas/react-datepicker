@@ -291,6 +291,8 @@ screenReaderMessage?: JSX.Element | () => JSX.Element;
 children: React.ReactNode;
 ```
 
+> Any props not listed above will be spread onto the underlying `DatePickerCalendar` element.
+
 ### `DatePickerMonth`
 
 ```ts

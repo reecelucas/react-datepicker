@@ -21,7 +21,9 @@ const DatePickerInput = ({
   ...props
 }: Props) => {
   const dispatch = React.useContext(DispatchContext);
-  const { selectedDate, showCalendar, locale } = React.useContext(StateContext);
+  const { selectedDate, showCalendar, locale, inputRef } = React.useContext(
+    StateContext
+  );
 
   const [value, setValue] = React.useState(
     props.placeholder ? '' : format(selectedDate, dateFormat, { locale })
@@ -88,6 +90,7 @@ const DatePickerInput = ({
   return (
     <>
       <input
+        ref={inputRef}
         type={'text'}
         value={value}
         onChange={onChange}

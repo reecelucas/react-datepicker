@@ -13,7 +13,7 @@ import { StateContext, DispatchContext } from './DatePickerContext';
 import reducer from '../reducer';
 import * as actionTypes from '../reducer/actionTypes';
 import { getClosestSelectableDate } from '../helpers/date';
-import { useUpdateEffect, useClickOutside } from '../helpers/hooks';
+import { useUpdateEffect } from '../helpers/hooks';
 import { DatePickerProps } from '../types';
 
 type Props = DatePickerProps & React.HTMLProps<HTMLDivElement>;
@@ -33,7 +33,9 @@ const DatePicker = ({
    * STATE + COMPUTED PROPERTIES
    ******************************************/
 
-  const ref = React.useRef<HTMLDivElement>(null);
+  const calendarRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
   const initDate = getClosestSelectableDate({
     date: initialDate,
     minDate,
@@ -70,6 +72,14 @@ const DatePicker = ({
     return () => window.removeEventListener('keydown', onKeyDown);
   });
 
+  React.useEffect(() => {
+    document.addEventListener('click', onClickOutside, true);
+
+    return () => {
+      document.removeEventListener('click', onClickOutside, true);
+    };
+  });
+
   useUpdateEffect(() => {
     /**
      * We use `useUpdateEffect` because we want to ignore the
@@ -79,15 +89,24 @@ const DatePicker = ({
     onSelect(state.selectedDate);
   }, [state.selectedDate]);
 
-  useClickOutside(ref, () => {
-    if (state.showCalendar) {
-      dispatch({ type: actionTypes.HIDE_CALENDAR });
-    }
-  });
-
   /*******************************************
    * EVENT HANDLERS
    ******************************************/
+
+  const onClickOutside = (event: Event) => {
+    const isInput =
+      inputRef &&
+      inputRef.current &&
+      inputRef.current.contains(event.target as Node);
+    const isCalendar =
+      calendarRef &&
+      calendarRef.current &&
+      calendarRef.current.contains(event.target as Node);
+
+    if (event.target && state.showCalendar && !(isInput || isCalendar)) {
+      dispatch({ type: actionTypes.HIDE_CALENDAR });
+    }
+  };
 
   const onInputKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Down' || event.key === 'ArrowDown') {
@@ -212,15 +231,15 @@ const DatePicker = ({
     maxDate,
     excludeDates,
     includeDates,
-    locale
+    locale,
+    calendarRef,
+    inputRef
   });
 
   return (
     <StateContext.Provider value={getContextValues()}>
       <DispatchContext.Provider value={dispatch}>
-        <div ref={ref} {...props}>
-          {children}
-        </div>
+        <div {...props}>{children}</div>
       </DispatchContext.Provider>
     </StateContext.Provider>
   );

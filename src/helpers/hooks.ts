@@ -32,27 +32,3 @@ export const useUpdateEffect: typeof React.useEffect = (effect, deps) => {
     deps
   );
 };
-
-export const useClickOutside = (
-  elemRef: React.RefObject<any>,
-  fn: (event: Event) => void
-) => {
-  React.useEffect(() => {
-    const clickOutside = (event: Event) => {
-      if (
-        event.target &&
-        elemRef &&
-        elemRef.current &&
-        !elemRef.current.contains(event.target)
-      ) {
-        fn(event);
-      }
-    };
-
-    document.addEventListener('click', clickOutside, true);
-
-    return () => {
-      document.removeEventListener('click', clickOutside, true);
-    };
-  });
-};

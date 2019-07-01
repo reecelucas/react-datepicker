@@ -30,5 +30,9 @@ export interface DatePickerProps {
   locale?: Locale; // Date-fns `locale` object
 }
 
-export type ContextProps = DatePickerState &
-  Omit<DatePickerProps, 'children' | 'onSelect' | 'initialDate'>;
+export interface ContextProps
+  extends DatePickerState,
+    Omit<DatePickerProps, 'children' | 'onSelect' | 'initialDate'> {
+  calendarRef: React.RefObject<HTMLDivElement>;
+  inputRef: React.RefObject<HTMLInputElement>;
+}
