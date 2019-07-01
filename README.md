@@ -1,6 +1,6 @@
 # react-datepicker
 
-An accessible, internationalizable React datepicker.
+An accessible, internationalizable React datepicker. [Demo](https://codesandbox.io/s/angry-water-z01z2?fontsize=14&hidenavigation=1).
 
 ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@reecelucas/react-datepicker.svg)
 ![npm (scoped)](https://img.shields.io/npm/v/@reecelucas/react-datepicker.svg)
