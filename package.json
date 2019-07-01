@@ -1,6 +1,6 @@
 {
   "name": "@reecelucas/react-datepicker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An accessible, internationalizable React datepicker",
   "main": "lib/index.js",
   "module": "esm/index.js",

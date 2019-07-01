@@ -27,6 +27,7 @@ An accessible, internationalizable React datepicker.
   * [`DatePickerMonth`](#DatePickerMonth)
   * [`DatePickerButton`](#DatePickerButton)
   * [`DatePickeTable`](#DatePickeTable)
+* [Styling](#styling)
 * [LICENSE](#LICENSE)
 
 ## Installation
@@ -327,6 +328,39 @@ renderDayContent?: (date: Date) => React.ReactNode;
 ```
 
 > Any props not listed above will be spread onto the underlying `DatePickerTable` element.
+
+## Styling
+
+`react-datepicker` doesn't provide any default styling; you're free to do what you want and use what you want.
+
+```jsx
+// Example using CSS Modules
+import * as styles from './styles';
+
+<DatePicker
+  className={styles.wrapper}
+  onSelect={date => console.log(date)}
+>
+  <DatePickerInput className={styles.input} />
+
+  <DatePickerCalendar>
+    <DatePickerMonth className={styles.selectedMonth} />
+    <DatePickerButton
+      className={styles.button}
+      updateMonth={({ prev }) => prev()}
+    >
+      Prev Month
+    </DatePickerButton>
+    <DatePickerButton
+      className={styles.button}
+      updateMonth={({ next }) => next()}
+    >
+      Next Month
+    </DatePickerButton>
+    <DatePickerTable className={styles.table} />
+  </DatePickerCalendar>
+</DatePicker>
+```
 
 ## LICENSE
 
