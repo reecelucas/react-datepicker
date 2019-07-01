@@ -266,7 +266,7 @@ const renderScreenReaderMsg = () => (
 ```js
 children: React.ReactNode;
 onSelect: (selectedDate: Date) => void;
-initialDate?: Date;
+initialDate?: Date; // Defaults to new Date(Date.now())
 minDate?: Date;
 maxDate?: Date;
 excludeDates?: Date[];
