@@ -100,11 +100,10 @@ export const getWeekDays = (locale?: Locale): string[] => {
  * I.e. Whether it should or should not be be marked as `disabled`.
  * A date can be selected if:
  *
- * 1. It is *not* in the past
- * 2. It falls *after* the user-provided `minDate`
- * 3. It falls *before* the user-provided `maxDate`
- * 4. It is *not* included in the user-provided `excludeDates` array
- * 5. It *is* included in the user-provided `includeDates` array
+ * 1. It falls *after* the user-provided `minDate`
+ * 2. It falls *before* the user-provided `maxDate`
+ * 3. It is *not* included in the user-provided `excludeDates` array
+ * 4. It *is* included in the user-provided `includeDates` array
  */
 export const dateIsSelectable = ({
   date,
