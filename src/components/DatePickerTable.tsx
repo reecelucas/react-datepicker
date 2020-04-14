@@ -79,13 +79,11 @@ const DatePickerCalendar = ({
     isSelected,
     isSelectable
   }: RenderAriaLabelParams): string => {
-    const status = isSelected
-      ? 'Selected. '
-      : `${isSelectable ? 'Available. ' : 'Not Available. '}`;
+    // you don't have to say it, your aria-disabled attribute does the job
 
     return isFunction(renderDayLabel)
       ? renderDayLabel({ date, isSelected, isSelectable })
-      : `${status}${format(date, 'eeee, do MMMM yyyy', { locale })}.`; // prettier-ignore
+      : `${format(date, 'eeee, do MMMM yyyy', { locale })}.`; // prettier-ignore
   };
 
   const renderTableRows = () =>
@@ -110,32 +108,35 @@ const DatePickerCalendar = ({
     });
 
     return (
-      <td
-        key={d.toString()}
-        role={'button'}
-        aria-label={renderAriaLabel({ date: d, isSelected, isSelectable })}
-        aria-disabled={isSelectable ? 'false' : 'true'}
-        aria-selected={isSelected ? 'true' : 'false'}
-        tabIndex={isSelected || isFocussed ? 0 : -1}
-        onClick={() =>
-          isSelectable &&
-          dispatch({ type: actionTypes.SET_SELECTED_DATE, payload: d })
-        }
-        ref={ref => {
-          if (ref && isFocussed) {
-            ref.focus();
+      <td key={d.toString()}>
+        {/* strongly suggesting to add a button to avoid to had specific table roles */}
+        <button
+          type='button'
+          aria-label={renderAriaLabel({ date: d, isSelected, isSelectable })}
+          aria-disabled={isSelectable ? 'false' : 'true'}
+          disabled={!isSelectable}
+          aria-selected={isSelected ? 'true' : 'false'}
+          tabIndex={isSelected || isFocussed ? 0 : -1}
+          onClick={() =>
+            isSelectable &&
+            dispatch({ type: actionTypes.SET_SELECTED_DATE, payload: d })
           }
-        }}
-      >
-        <span aria-hidden={'true'}>
-          {isFunction(renderDayContent) ? renderDayContent(d) : getDate(d)}
-        </span>
+          ref={ref => {
+            if (ref && isFocussed) {
+              ref.focus();
+            }
+          }}
+        >
+          <span aria-hidden={'true'}>
+            {isFunction(renderDayContent) ? renderDayContent(d) : getDate(d)}
+          </span>
+        </button>
       </td>
     );
   };
 
   return (
-    <table {...props}>
+    <table {...props} role='grid'>
       <thead>
         <tr>{renderWeekdays()}</tr>
       </thead>

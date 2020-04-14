@@ -9,7 +9,7 @@ const DatePickerCalendar = ({ children, ...props }: Props) => {
   const { showCalendar, calendarRef } = React.useContext(StateContext);
 
   return showCalendar ? (
-    <div ref={calendarRef} {...props}>
+    <div ref={calendarRef} {...props} role='dialog'>
       {children}
     </div>
   ) : null;
