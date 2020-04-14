@@ -80,8 +80,9 @@ const DatePickerInput = ({
   };
 
   const onFocus = () => {
-    dispatch({ type: actionTypes.PREVENT_CELL_FOCUS });
-
+    // with role dialog, the design pattern tells us to set focus to first focusable elem in dialog
+    //dispatch({ type: actionTypes.PREVENT_CELL_FOCUS });
+    // TODO Set focus to current date.
     if (!showCalendar) {
       dispatch({ type: actionTypes.SHOW_CALENDAR });
     }

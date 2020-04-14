@@ -196,6 +196,20 @@ const DatePicker = ({
       }
     }
   };
+  const onTabKeyDown = (event: KeyboardEvent) => {
+    // not very clean :(
+    const focusableElements = document.querySelectorAll("div[role='dialog'] button:not([tabindex='-1'])");
+    const firstFocusableEl = focusableElements[0];
+    const lastFocusableEl = focusableElements[focusableElements.length-1];
+    // make focus trap
+    if (event.shiftKey && document.activeElement === firstFocusableEl) {
+      event.preventDefault();
+      lastFocusableEl.focus();
+    } else if (!event.shiftKey && document.activeElement === lastFocusableEl) {
+      event.preventDefault();
+      firstFocusableEl.focus();
+    }
+  }
 
   const onKeyDown = (event: KeyboardEvent) => {
     if (!state.showCalendar) {
@@ -204,9 +218,10 @@ const DatePicker = ({
 
     const target = event.target as HTMLButtonElement | HTMLInputElement;
     const isInput = target && target.matches('input');
-    const isTableCell = target && target.matches('td[role="button"]');
+    const isTableCell = target && target.matches('button');
 
     if (event.key === 'Esc' || event.key === 'Escape') {
+      // todo : set focus back to input
       dispatch({ type: actionTypes.HIDE_CALENDAR });
       return;
     }
@@ -218,6 +233,11 @@ const DatePicker = ({
 
     if (isTableCell) {
       onCellKeyDown(event);
+    }
+
+    if (event.key === 'Tab') {
+      onTabKeyDown(event);
+      return;
     }
   };
 
