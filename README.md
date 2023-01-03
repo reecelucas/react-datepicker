@@ -26,7 +26,7 @@ An accessible, internationalizable React datepicker. [Demo](https://codesandbox.
   * [`DatePickerCalendar`](#DatePickerCalendar)
   * [`DatePickerMonth`](#DatePickerMonth)
   * [`DatePickerButton`](#DatePickerButton)
-  * [`DatePickeTable`](#DatePickeTable)
+  * [`DatePickerTable`](#DatePickerTable)
 * [Styling](#styling)
 * [LICENSE](#LICENSE)
 
